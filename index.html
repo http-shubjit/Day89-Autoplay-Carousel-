@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Autoplay Carousel</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel {
+      position: relative;
+
+      width: 500px;
+      height: 300px;
+      overflow: hidden;
+      background-color: #cdcdcd;
+    }
+
+    .carousel-item .slide-image {
+      align-items: center;
+      justify-content: center;
+      object-fit: cover;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .carousel-item {
+      position: absolute;
+      width: 100%;
+      height: 270px;
+      border: none;
+      top: 0;
+      left: 100%;
+    }
+
+    .carousel-item.active {
+      left: 0;
+      transition: all 0.3s ease-out;
+    }
+
+    .carousel-item div {
+      height: 100%;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .violet {
+      background-color: violet;
+    }
+  </style>
+  <body>
+    <div class="carousel">
+      <div class="carousel-item">
+        <div
+          class="slide-image"
+          style="
+            background-image: url('https://rukminim2.flixcart.com/image/850/1000/l3q7jww0/poster/n/t/5/medium-lord-shri-krishna-with-arjun-mahabharat-poster-for-room-original-images2fkdmjq6bu.jpeg?q=20&crop=false');
+          "
+        ></div>
+      </div>
+      <div class="carousel-item">
+        <div class="slide-image" style="background-image: url('')"></div>
+      </div>
+      <div class="carousel-item">
+        <div
+          class="slide-image"
+          style="
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3a/Ravivarmapress.jpg');
+          "
+        ></div>
+      </div>
+      <div class="carousel-item">
+        <div
+          class="slide-image"
+          style="
+            background-image: url('https://e0.pxfuel.com/wallpapers/271/893/desktop-wallpaper-hanuman-harish-moger-hanuman-hanuman-jayanthi-lord-hanuman-hanuman-art-thumbnail.jpg');
+          "
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        let slides = document.getElementsByClassName("carousel-item");
+
+        function addActive(slide) {
+          slide.classList.add("active");
+        }
+
+        function removeActive(slide) {
+          slide.classList.remove("active");
+        }
+
+        addActive(slides[0]);
+        setInterval(function () {
+          for (let i = 0; i < slides.length; i++) {
+            if (i + 1 == slides.length) {
+              addActive(slides[0]);
+              setTimeout(removeActive, 350, slides[i]);
+              break;
+            }
+            if (slides[i].classList.contains("active")) {
+              setTimeout(removeActive, 350, slides[i]);
+              addActive(slides[i + 1]);
+              break;
+            }
+          }
+        }, 1500);
+      };
+    </script>
+  </body>
+</html>
